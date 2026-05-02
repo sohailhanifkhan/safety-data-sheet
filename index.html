@@ -172,6 +172,18 @@ const hazardIcons = {
 };
 
 function render(list) {
+   <script>
+const hazardIcons = {
+    "flammable": "🔥",
+    "gas under pressure": "🧯",
+    "health hazard": "☣️",
+    "environmental hazard": "🌍",
+    "oxidizer": "⚠️",
+    "oxidizing": "⚠️",
+    "corrosive": "🧪"
+};
+
+function render(list) {
     const container = document.getElementById("list");
     container.innerHTML = "";
 
@@ -208,27 +220,3 @@ function render(list) {
     });
 }
 </script>
-/* ✅ SEARCH + FILTER */
-function applyFilters() {
-    const text = document.getElementById("search").value.toLowerCase();
-    const cat = document.getElementById("categoryFilter").value;
-
-    const filtered = dataList.filter(item => {
-        const nameMatch = item.name.toLowerCase().includes(text);
-        const catMatch = cat === "All" || item.category === cat;
-        return nameMatch && catMatch;
-    });
-
-    render(filtered);
-}
-
-/* ✅ STATS */
-function updateStats() {
-    document.getElementById("total").innerText = dataList.length;
-    document.getElementById("available").innerText =
-        dataList.filter(i => i.url).length;
-}
-</script>
-
-</body>
-</html>
