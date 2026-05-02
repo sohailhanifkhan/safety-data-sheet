@@ -160,16 +160,40 @@ fetch(sheetURL)
 
 /* ✅ DISPLAY LIST */
 function render(list) {
+    <script>
+const hazardIcons = {
+    "flammable": "🔥",
+    "gas under pressure": "🧯",
+    "health hazard": "☣️",
+    "environmental hazard": "🌍",
+    "oxidizer": "⚠️",
+    "oxidizing": "⚠️",
+    "corrosive": "🧪"
+};
+
+function render(list) {
     const container = document.getElementById("list");
     container.innerHTML = "";
 
     list.forEach(item => {
+
         const card = document.createElement("div");
         card.className = "card";
 
+        // ✅ Generate hazard icons
+        let icons = "";
+        if (item.category) {
+            item.category.split(",").forEach(h => {
+                const key = h.trim().toLowerCase();
+                if (hazardIcons[key]) {
+                    icons += hazardIcons[key] + " ";
+                }
+            });
+        }
+
         const btn = document.createElement("button");
-        btn.className = item.category.toLowerCase();
-        btn.textContent = `${item.name} (${item.category})`;
+        btn.style.background = "#2a5298";
+        btn.innerHTML = icons + item.name;
 
         btn.onclick = () => {
             if (item.url && item.url.startsWith("http")) {
@@ -183,7 +207,7 @@ function render(list) {
         container.appendChild(card);
     });
 }
-
+</script>
 /* ✅ SEARCH + FILTER */
 function applyFilters() {
     const text = document.getElementById("search").value.toLowerCase();
